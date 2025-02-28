@@ -1,7 +1,61 @@
+<!--<div>
+  <div>
+    <h1>
+      <%#= @the_reading_plan.title %>-->
+<!--    </h1>
+
+    <div>
+      <div>
+        <a href="/reading_plans">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_reading_plan/<%#= @the_reading_plan.id %>">
+          Delete reading plan
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%#= @the_reading_plan.title %>-->
+<!--      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%#= @the_reading_plan.description %>-->
+<!--      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%#= time_ago_in_words(@the_reading_plan.created_at) %> ago-->
+<!--      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%#= time_ago_in_words(@the_reading_plan.updated_at) %> ago-->
+<!--      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>-->
+
 <div>
   <div>
     <h1>
-      Reading plan #<%= @the_reading_plan.id %> details
+      <%= @the_reading_plan.title %>
     </h1>
 
     <div>
@@ -34,24 +88,28 @@
       </dd>
 
       <dt>
-        Created at
+        Total Books
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_reading_plan.created_at) %> ago
+        <%= @the_reading_plan.books.length %>
       </dd>
 
       <dt>
-        Updated at
+        Sequence
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_reading_plan.updated_at) %> ago
+        <ol>
+          <% @the_reading_plan.books.each do |plan_content| %>
+            <li><%= Book.find(plan_content.book_id).title %></li>
+          <% end %>
+        </ol>
       </dd>
     </dl>
   </div>
 </div>
 
-<hr>
 
+<hr>
 
 <div>
   <div>
