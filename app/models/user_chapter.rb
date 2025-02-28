@@ -12,4 +12,7 @@
 #  user_id         :integer
 #
 class UserChapter < ApplicationRecord
+  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
+  belongs_to :chapter, required: true, class_name: "Chapter", foreign_key: "chapter_id"
+  belongs_to :reading_plan, class_name: "ReadingPlan", foreign_key: "reading_plan_id"
 end

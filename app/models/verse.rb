@@ -10,4 +10,5 @@
 #  chapter_id :integer
 #
 class Verse < ApplicationRecord
+  belongs_to :chapter, required: true, class_name: "Chapter", foreign_key: "chapter_id"
 end

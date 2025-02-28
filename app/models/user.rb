@@ -27,4 +27,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many  :friends, class_name: "Friendship", foreign_key: "user1_id", dependent: :nullify
+  has_many  :user_progresses, class_name: "UserBook", foreign_key: "user_id", dependent: :destroy
+  has_many  :user_chapters, class_name: "UserChapter", foreign_key: "user_id", dependent: :destroy
+  belongs_to :current_book, required: true, class_name: "Book", foreign_key: "current_book_id", counter_cache: :current_readers_count
+  has_many :readings, through: :user_progresses, source: :book
 end
