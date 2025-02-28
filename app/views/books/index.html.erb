@@ -1,0 +1,166 @@
+<div>
+  <div>
+    <h1>
+      List of all books
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new book
+    </h2>
+
+    <form action="/insert_book" method="post">
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
+      <div>
+        <label for="testament_box">
+          Testament
+        </label>
+
+        <input type="text" id="testament_box" name="query_testament">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="total_chapters_box">
+          Total chapters
+        </label>
+
+        <input type="text" id="total_chapters_box" name="query_total_chapters">
+      </div>
+
+      <div>
+        <label for="bible_position_box">
+          Bible position
+        </label>
+
+        <input type="text" id="bible_position_box" name="query_bible_position">
+      </div>
+
+      <div>
+        <label for="current_readers_count_box">
+          Current readers count
+        </label>
+
+        <input type="text" id="current_readers_count_box" name="query_current_readers_count">
+      </div>
+
+      <button>
+        Create book
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Testament
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Total chapters
+        </th>
+
+        <th>
+          Bible position
+        </th>
+
+        <th>
+          Current readers count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_books.each do |a_book| %>
+      <tr>
+        <td>
+          <%= a_book.id %>
+        </td>
+
+        <td>
+          <%= a_book.title %>
+        </td>
+
+        <td>
+          <%= a_book.testament %>
+        </td>
+
+        <td>
+          <%= a_book.description %>
+        </td>
+
+        <td>
+          <%= a_book.total_chapters %>
+        </td>
+
+        <td>
+          <%= a_book.bible_position %>
+        </td>
+
+        <td>
+          <%= a_book.current_readers_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_book.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_book.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/books/<%= a_book.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

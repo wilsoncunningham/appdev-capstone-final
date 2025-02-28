@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all user books
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new user book
+    </h2>
+
+    <form action="/insert_user_book" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="book_id_box">
+          Book
+        </label>
+
+        <input type="text" id="book_id_box" name="query_book_id">
+      </div>
+
+      <div>
+        <label for="completed_at_box">
+          Completed at
+        </label>
+
+        <input type="time" id="completed_at_box" name="query_completed_at">
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <textarea id="status_box" name="query_status" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create user book
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Book
+        </th>
+
+        <th>
+          Completed at
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_user_books.each do |a_user_book| %>
+      <tr>
+        <td>
+          <%= a_user_book.id %>
+        </td>
+
+        <td>
+          <%= a_user_book.user_id %>
+        </td>
+
+        <td>
+          <%= a_user_book.book_id %>
+        </td>
+
+        <td>
+          <%= a_user_book.completed_at %>
+        </td>
+
+        <td>
+          <%= a_user_book.status %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_user_book.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_user_book.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/user_books/<%= a_user_book.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

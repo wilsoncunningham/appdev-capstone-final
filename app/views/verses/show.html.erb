@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Verse #<%= @the_verse.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/verses">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_verse/<%= @the_verse.id %>">
+          Delete verse
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Chapter
+      </dt>
+      <dd>
+        <%= @the_verse.chapter_id %>
+      </dd>
+
+      <dt>
+        Number
+      </dt>
+      <dd>
+        <%= @the_verse.number %>
+      </dd>
+
+      <dt>
+        Content
+      </dt>
+      <dd>
+        <%= @the_verse.content %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_verse.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_verse.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit verse
+    </h2>
+
+    <form action="/modify_verse/<%= @the_verse.id %>"  method="post" >
+      <div>
+        <label for="chapter_id_box">
+          Chapter
+        </label>
+
+        <input type="text" id="chapter_id_box" name="query_chapter_id" value="<%= @the_verse.chapter_id %>">
+      </div>
+
+      <div>
+        <label for="number_box">
+          Number
+        </label>
+
+        <input type="text" id="number_box" name="query_number" value="<%= @the_verse.number %>">
+      </div>
+
+      <div>
+        <label for="content_box">
+          Content
+        </label>
+
+        <textarea id="content_box" name="query_content"><%= @the_verse.content %></textarea>
+      </div>
+
+      <button>
+        Update verse
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

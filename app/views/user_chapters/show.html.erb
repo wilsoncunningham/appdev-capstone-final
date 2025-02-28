@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      User chapter #<%= @the_user_chapter.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/user_chapters">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_user_chapter/<%= @the_user_chapter.id %>">
+          Delete user chapter
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Chapter
+      </dt>
+      <dd>
+        <%= @the_user_chapter.chapter_id %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_user_chapter.user_id %>
+      </dd>
+
+      <dt>
+        Completed at
+      </dt>
+      <dd>
+        <%= @the_user_chapter.completed_at %>
+      </dd>
+
+      <dt>
+        Status
+      </dt>
+      <dd>
+        <%= @the_user_chapter.status %>
+      </dd>
+
+      <dt>
+        Reading plan
+      </dt>
+      <dd>
+        <%= @the_user_chapter.reading_plan_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_chapter.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_chapter.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit user chapter
+    </h2>
+
+    <form action="/modify_user_chapter/<%= @the_user_chapter.id %>"  method="post" >
+      <div>
+        <label for="chapter_id_box">
+          Chapter
+        </label>
+
+        <input type="text" id="chapter_id_box" name="query_chapter_id" value="<%= @the_user_chapter.chapter_id %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_user_chapter.user_id %>">
+      </div>
+
+      <div>
+        <label for="completed_at_box">
+          Completed at
+        </label>
+
+        <input type="time" id="completed_at_box" name="query_completed_at" value="<%= @the_user_chapter.completed_at %>">
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status" value="<%= @the_user_chapter.status %>">
+      </div>
+
+      <div>
+        <label for="reading_plan_id_box">
+          Reading plan
+        </label>
+
+        <input type="text" id="reading_plan_id_box" name="query_reading_plan_id" value="<%= @the_user_chapter.reading_plan_id %>">
+      </div>
+
+      <button>
+        Update user chapter
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

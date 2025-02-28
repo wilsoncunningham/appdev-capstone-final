@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      User book #<%= @the_user_book.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/user_books">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_user_book/<%= @the_user_book.id %>">
+          Delete user book
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_user_book.user_id %>
+      </dd>
+
+      <dt>
+        Book
+      </dt>
+      <dd>
+        <%= @the_user_book.book_id %>
+      </dd>
+
+      <dt>
+        Completed at
+      </dt>
+      <dd>
+        <%= @the_user_book.completed_at %>
+      </dd>
+
+      <dt>
+        Status
+      </dt>
+      <dd>
+        <%= @the_user_book.status %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_book.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_book.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit user book
+    </h2>
+
+    <form action="/modify_user_book/<%= @the_user_book.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_user_book.user_id %>">
+      </div>
+
+      <div>
+        <label for="book_id_box">
+          Book
+        </label>
+
+        <input type="text" id="book_id_box" name="query_book_id" value="<%= @the_user_book.book_id %>">
+      </div>
+
+      <div>
+        <label for="completed_at_box">
+          Completed at
+        </label>
+
+        <input type="time" id="completed_at_box" name="query_completed_at" value="<%= @the_user_book.completed_at %>">
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <textarea id="status_box" name="query_status"><%= @the_user_book.status %></textarea>
+      </div>
+
+      <button>
+        Update user book
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all verses
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new verse
+    </h2>
+
+    <form action="/insert_verse" method="post">
+      <div>
+        <label for="chapter_id_box">
+          Chapter
+        </label>
+
+        <input type="text" id="chapter_id_box" name="query_chapter_id">
+      </div>
+
+      <div>
+        <label for="number_box">
+          Number
+        </label>
+
+        <input type="text" id="number_box" name="query_number">
+      </div>
+
+      <div>
+        <label for="content_box">
+          Content
+        </label>
+
+        <textarea id="content_box" name="query_content" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create verse
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Chapter
+        </th>
+
+        <th>
+          Number
+        </th>
+
+        <th>
+          Content
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_verses.each do |a_verse| %>
+      <tr>
+        <td>
+          <%= a_verse.id %>
+        </td>
+
+        <td>
+          <%= a_verse.chapter_id %>
+        </td>
+
+        <td>
+          <%= a_verse.number %>
+        </td>
+
+        <td>
+          <%= a_verse.content %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_verse.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_verse.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/verses/<%= a_verse.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

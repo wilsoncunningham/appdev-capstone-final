@@ -1,0 +1,146 @@
+<div>
+  <div>
+    <h1>
+      Book #<%= @the_book.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/books">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_book/<%= @the_book.id %>">
+          Delete book
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_book.title %>
+      </dd>
+
+      <dt>
+        Testament
+      </dt>
+      <dd>
+        <%= @the_book.testament %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_book.description %>
+      </dd>
+
+      <dt>
+        Total chapters
+      </dt>
+      <dd>
+        <%= @the_book.total_chapters %>
+      </dd>
+
+      <dt>
+        Bible position
+      </dt>
+      <dd>
+        <%= @the_book.bible_position %>
+      </dd>
+
+      <dt>
+        Current readers count
+      </dt>
+      <dd>
+        <%= @the_book.current_readers_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_book.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_book.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit book
+    </h2>
+
+    <form action="/modify_book/<%= @the_book.id %>"  method="post" >
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title" value="<%= @the_book.title %>">
+      </div>
+
+      <div>
+        <label for="testament_box">
+          Testament
+        </label>
+
+        <input type="text" id="testament_box" name="query_testament" value="<%= @the_book.testament %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_book.description %></textarea>
+      </div>
+
+      <div>
+        <label for="total_chapters_box">
+          Total chapters
+        </label>
+
+        <input type="text" id="total_chapters_box" name="query_total_chapters" value="<%= @the_book.total_chapters %>">
+      </div>
+
+      <div>
+        <label for="bible_position_box">
+          Bible position
+        </label>
+
+        <input type="text" id="bible_position_box" name="query_bible_position" value="<%= @the_book.bible_position %>">
+      </div>
+
+      <div>
+        <label for="current_readers_count_box">
+          Current readers count
+        </label>
+
+        <input type="text" id="current_readers_count_box" name="query_current_readers_count" value="<%= @the_book.current_readers_count %>">
+      </div>
+
+      <button>
+        Update book
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

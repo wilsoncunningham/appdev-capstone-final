@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Chapter #<%= @the_chapter.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/chapters">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_chapter/<%= @the_chapter.id %>">
+          Delete chapter
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Book
+      </dt>
+      <dd>
+        <%= @the_chapter.book_id %>
+      </dd>
+
+      <dt>
+        Number
+      </dt>
+      <dd>
+        <%= @the_chapter.number %>
+      </dd>
+
+      <dt>
+        Content
+      </dt>
+      <dd>
+        <%= @the_chapter.content %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_chapter.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_chapter.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit chapter
+    </h2>
+
+    <form action="/modify_chapter/<%= @the_chapter.id %>"  method="post" >
+      <div>
+        <label for="book_id_box">
+          Book
+        </label>
+
+        <input type="text" id="book_id_box" name="query_book_id" value="<%= @the_chapter.book_id %>">
+      </div>
+
+      <div>
+        <label for="number_box">
+          Number
+        </label>
+
+        <input type="text" id="number_box" name="query_number" value="<%= @the_chapter.number %>">
+      </div>
+
+      <div>
+        <label for="content_box">
+          Content
+        </label>
+
+        <textarea id="content_box" name="query_content"><%= @the_chapter.content %></textarea>
+      </div>
+
+      <button>
+        Update chapter
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

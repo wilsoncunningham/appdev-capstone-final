@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all friendships
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new friendship
+    </h2>
+
+    <form action="/insert_friendship" method="post">
+      <div>
+        <label for="user1_id_box">
+          User1
+        </label>
+
+        <input type="text" id="user1_id_box" name="query_user1_id">
+      </div>
+
+      <div>
+        <label for="user2_id_box">
+          User2
+        </label>
+
+        <input type="text" id="user2_id_box" name="query_user2_id">
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status">
+      </div>
+
+      <button>
+        Create friendship
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User1
+        </th>
+
+        <th>
+          User2
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_friendships.each do |a_friendship| %>
+      <tr>
+        <td>
+          <%= a_friendship.id %>
+        </td>
+
+        <td>
+          <%= a_friendship.user1_id %>
+        </td>
+
+        <td>
+          <%= a_friendship.user2_id %>
+        </td>
+
+        <td>
+          <%= a_friendship.status %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_friendship.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_friendship.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/friendships/<%= a_friendship.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
