@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root "books#index"
+  root "home#index"
 
   ######################################
 
   get("/", {:controller => "home", :action => "index"})
 
-  get("/login", {:controller => "home", :action => "login"})
-  post("/test_credentials", {:controller => "home", :action => "test_credentials"})
+  # get("/login", {:controller => "home", :action => "login"})
+  # post("/test_credentials", {:controller => "home", :action => "test_credentials"})
 
   get("/books", {:controller => "books", :action => "index"})
   get("books/:book_id/", {:controller => "books", :action => "read_book"})
