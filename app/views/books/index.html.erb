@@ -1,3 +1,41 @@
+<div class="m-2">
+  <h2>Click on a book to start reading</h2>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+      <div class="list-group">
+        <h3 class="list-group-item bg-primary-subtle">Old Testament</h3>
+        <% Book.where({:testament => "old"}).each do |book|%>
+          <a href="/books/<%= book.id %>/1" class="list-group-item list-group-item-action">
+            <%= book.title %>
+          </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+      <div class="list-group">
+        <h3 class="list-group-item bg-primary-subtle">New Testament</h3>
+        <% Book.where({:testament => "new"}).each do |book|%>
+          <a href="/books/<%= book.id %>/1" class="list-group-item list-group-item-action">
+            <%= book.title %>
+          </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
+
+
+
+
+
+<!--
 <div>
   <div>
     <h1>
@@ -48,14 +86,6 @@
       </div>
 
       <div>
-        <label for="bible_position_box">
-          Bible position
-        </label>
-
-        <input type="text" id="bible_position_box" name="query_bible_position">
-      </div>
-
-      <div>
         <label for="current_readers_count_box">
           Current readers count
         </label>
@@ -96,10 +126,6 @@
         </th>
 
         <th>
-          Bible position
-        </th>
-
-        <th>
           Current readers count
         </th>
 
@@ -115,52 +141,49 @@
         </th>
       </tr>
 
-      <% @list_of_books.each do |a_book| %>
-      <tr>
+      <%# @list_of_books.each do |a_book| %>-->
+<!--      <tr>
         <td>
-          <%= a_book.id %>
-        </td>
+          <%#= a_book.id %>-->
+<!--        </td>
 
         <td>
-          <%= a_book.title %>
-        </td>
+          <%#= a_book.title %>-->
+<!--        </td>
 
         <td>
-          <%= a_book.testament %>
-        </td>
+          <%#= a_book.testament %>-->
+<!--        </td>
 
         <td>
-          <%= a_book.description %>
-        </td>
+          <%#= a_book.description %>-->
+<!--        </td>
 
         <td>
-          <%= a_book.total_chapters %>
-        </td>
+          <%#= a_book.total_chapters %>-->
+<!--        </td>
 
         <td>
-          <%= a_book.bible_position %>
-        </td>
+          <%#= a_book.current_readers_count %>-->
+<!--        </td>
 
         <td>
-          <%= a_book.current_readers_count %>
-        </td>
+          <%#= time_ago_in_words(a_book.created_at) %> ago-->
+<!--        </td>
+        <td>
+          <%#= time_ago_in_words(a_book.updated_at) %> ago-->
+<!--        </td>
 
         <td>
-          <%= time_ago_in_words(a_book.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_book.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/books/<%= a_book.id %>">
+          <a href="/books/<%#= a_book.id %>">
             Show details
           </a>
         </td>
       </tr>
-      <% end %>
-    </table>
+      <%# end %>-->
+<!--    </table>
   </div>
 </div>
 
 <hr>
+-->
