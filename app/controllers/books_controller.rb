@@ -1,8 +1,15 @@
+require "http"
+require "json"
+require "dotenv/load"
+
 class BooksController < ApplicationController
   def index
     matching_books = Book.all
 
     @list_of_books = matching_books.order({ :created_at => :desc })
+
+    @ot_books_list = Book.where({:testament => "old"})
+    @nt_books_list = Book.where({:testament => "new"})
 
     render({ :template => "books/index" })
   end
@@ -23,7 +30,6 @@ class BooksController < ApplicationController
     the_book.testament = params.fetch("query_testament")
     the_book.description = params.fetch("query_description")
     the_book.total_chapters = params.fetch("query_total_chapters")
-    the_book.bible_position = params.fetch("query_bible_position")
     the_book.current_readers_count = params.fetch("query_current_readers_count")
 
     if the_book.valid?
@@ -42,7 +48,6 @@ class BooksController < ApplicationController
     the_book.testament = params.fetch("query_testament")
     the_book.description = params.fetch("query_description")
     the_book.total_chapters = params.fetch("query_total_chapters")
-    the_book.bible_position = params.fetch("query_bible_position")
     the_book.current_readers_count = params.fetch("query_current_readers_count")
 
     if the_book.valid?
@@ -61,4 +66,56 @@ class BooksController < ApplicationController
 
     redirect_to("/books", { :notice => "Book deleted successfully."} )
   end
+
+  def read_book
+    book_id = params.fetch("book_id")
+    @book = Book.find(book_id)
+    render({:template => "/reading/book"})
+  end
+
+
+  def read_chapter
+    book_id = params.fetch("book_id")
+    @book = Book.find(book_id)
+    @chapter_number = params.fetch("chapter_number")
+
+    esv_api_key = ENV.fetch("ESV_API_KEY") 
+    api_url = "https://api.esv.org/v3/passage/html/"
+
+
+    params = {
+      "q": @book.title + " " + @chapter_number,
+      "include-headings": true,
+      "include-footnotes": true,
+      "include-footnote-body": true,
+      "include-verse-numbers": true,
+      "include-short-copyright": true,
+      "include-passage-references": true,
+      "include-css-link": true,
+      "inline-styles": false,
+      "wrapping-div": false,
+      "div-classes": false,
+      "include-chapter-numbers": false,
+      "include-crossrefs": false
+    }
+
+    # book_id = Book.where({:title => @book_title.capitalize})[0].id
+    # chapter = Chapter.where({:book_id => book_id, :number => @chapter_number})[0]
+
+    # params = chapter.content
+
+    headers = {
+        "Authorization": "Token #{esv_api_key}"
+    }
+
+    response = HTTP.headers(headers).get(api_url, params: params)
+
+    body = JSON.parse(response.body.to_s)
+    @passage = body["passages"][0]
+
+    # passages.any? ? passages[0].strip : "Error: Passage not found"
+
+    render({:template => "/chapters/read"})
+  end
+
 end
