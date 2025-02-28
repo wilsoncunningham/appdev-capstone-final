@@ -1,16 +1,31 @@
 <h1>Welcome!</h1>
 
-<nav>
-  <% if current_user != nil %>
-    <a href="/users/sign_out">Sign out</a>
+<!--<nav>-->
+  <%# if current_user != nil %>
+<!--    <a href="/users/sign_out">Sign out</a>
     <a href="/users/edit">Edit profile</a>
-  <% else %>
-    <a href="/users/sign_up">Sign up</a>
+  <%# else %>-->
+<!--    <a href="/users/sign_up">Sign up</a>
     <a href="/users/sign_in">Sign in</a>
-  <% end %>
-</nav>
+  <%# end %>-->
+<!--</nav>-->
 
 
 <a href="/books">Start Reading</a>
 
 <p>Check out the <a href="/reading_plans">Reading Plans</a></p>
+
+
+<% if current_user != nil %>
+
+  <h3>Continue Reading</h3>
+    <p>Pick back up at (current chapter), or 
+      <a href="/books">browse all books.</a>
+    </p>
+
+  <h3>My Reading Plans</h3>
+
+
+
+
+<% end %>
