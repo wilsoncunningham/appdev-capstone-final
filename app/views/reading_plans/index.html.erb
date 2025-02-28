@@ -1,8 +1,28 @@
 <div>
   <div>
     <h1>
-      List of all reading plans
+      Reading Plans
     </h1>
+  </div>
+</div>
+
+<hr>
+
+
+<div class="accordion" id="reading_plans_accordion">
+  <% ReadingPlan.all.each do |plan|%>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= plan.id %>" aria-expanded="false" aria-controls="collapse_<%= plan.id %>">
+          <%= plan.title %>
+        </button>
+      </h2>
+      <div id="collapse_<%= plan.id %>" class="accordion-collapse collapse" data-bs-parent="#reading_plans_accordion">
+        <div class="accordion-body">
+          <%= plan.description %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
