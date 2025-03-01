@@ -4,31 +4,52 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
     <div class="col-md-3">
-      <div class="list-group">
-        <h3 class="list-group-item bg-primary-subtle">Old Testament</h3>
-        <% Book.where({:testament => "old"}).each do |book|%>
-          <a href="/books/<%= book.id %>/1" class="list-group-item list-group-item-action">
-            <%= book.title %>
-          </a>
-        <% end %>
+      <div class="accordion" id="old_testament_accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_old_testament" aria-expanded="false" aria-controls="collapse_old_testament">
+              <strong>Old Testament</strong>
+            </button>
+          </h2>
+          <% Book.where({:testament => "old"}).each do |book|%>
+            <div id="collapse_old_testament" class="accordion-collapse collapse" data-bs-parent="#old_testament_accordion">
+              <div class="accordion-body">
+                <a href="/books/<%= book.id %>/1">
+                  <%= book.title %>
+                </a>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-3"></div>
     <div class="col-md-3">
-      <div class="list-group">
-        <h3 class="list-group-item bg-primary-subtle">New Testament</h3>
-        <% Book.where({:testament => "new"}).each do |book|%>
-          <a href="/books/<%= book.id %>/1" class="list-group-item list-group-item-action">
-            <%= book.title %>
-          </a>
-        <% end %>
+      <div class="accordion" id="new_testament_accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_new_testament" aria-expanded="false" aria-controls="collapse_new_testament">
+              <strong>New Testament</strong>
+            </button>
+          </h2>
+          <% Book.where({:testament => "new"}).each do |book|%>
+            <div id="collapse_new_testament" class="accordion-collapse collapse" data-bs-parent="#new_testament_accordion">
+              <div class="accordion-body">
+                <a href="/books/<%= book.id %>/1">
+                  <%= book.title %>
+                </a>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="col-md-2"></div>
   </div>
 </div>
+
 
 
 

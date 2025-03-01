@@ -29,17 +29,22 @@
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= plan.id %>" aria-expanded="false" aria-controls="collapse_<%= plan.id %>">
-              <%= plan.title %>
+              <strong><%= plan.title %></strong>
             </button>
           </h2>
           <div id="collapse_<%= plan.id %>" class="accordion-collapse collapse" data-bs-parent="#reading_plans_accordion">
             <div class="accordion-body">
               <%= plan.description %>
+              <br><br>
+              <div>
+                <a href="/reading_plans/<%= plan.id %>">
+                  See details
+                </a>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
-      </div>
     </div>
 
 
