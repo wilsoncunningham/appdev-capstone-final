@@ -12,11 +12,16 @@
 
 <nav aria-label="Chapter navigation" class="my-3">
   <ul class="pagination">
-    <% pagination_span = 10 %>
+    <%
+    pagination_span = 14
+    upper_bound = @chapter_number + (pagination_span / 2)
+    lower_bound = @chapter_number - (pagination_span / 2)
+    chapters_from_end = @book.total_chapters - @chapter_number
+     %>
 
-    <% if @chapter_number.to_i > 1 %>
+    <% if @chapter_number > 1 %>
       <li class="page-item">
-        <a class="page-link" href="/books/<%= @book.id %>/<%= @chapter_number.to_i - 1 %>">
+        <a class="page-link" href="/books/<%= @book.id %>/<%= @chapter_number - 1 %>">
           Previous Chapter
         </a>
       </li>
@@ -39,12 +44,15 @@
           </a>
         </li>
       <% end %>
-
     <% else %>
-      <% span_to_end = @book.total_chapters - @chapter_number.to_i %> 
-
-      <% if span_to_end > 10 %>
-        <% (@chapter_number.to_i..(@chapter_number.to_i + 10)).each do |chap_num| %>
+    
+      <% if lower_bound > 1 && upper_bound < @book.total_chapters %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+        <% (lower_bound..upper_bound).each do |chap_num| %>
           <li class="page-item">
             <a class="page-link" href="/books/<%= @book.id %>/<%= chap_num %>">
               <%= chap_num %>
@@ -56,7 +64,20 @@
             ...
           </a>
         </li>
-      <% else %>
+      <% elsif lower_bound <= 1 && upper_bound < @book.total_chapters %>
+        <% (1..pagination_span).each do |chap_num| %>
+          <li class="page-item">
+            <a class="page-link" href="/books/<%= @book.id %>/<%= chap_num %>">
+              <%= chap_num %>
+            </a>
+          </li>
+        <% end %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+      <% else  %>
         <li class="page-item">
           <a class="page-link" href="#">
             ...
@@ -70,12 +91,11 @@
           </li>
         <% end %>
       <% end %>
-  
     <% end %>
 
-    <% if @chapter_number.to_i < @book.total_chapters %>
+    <% if @chapter_number < @book.total_chapters %>
       <li class="page-item">
-        <a href="/books/<%= @book.id %>/<%= @chapter_number.to_i + 1 %>" class="page-link">
+        <a href="/books/<%= @book.id %>/<%= @chapter_number + 1 %>" class="page-link">
           Next Chapter
         </a>
       </li>
@@ -130,15 +150,15 @@
 <!--
 <div class="d-flex justify-content-between">
   <div>
-    <%# if @chapter_number.to_i > 1 %>-->
-<!--      <a href="/books/<%#= @book.id %>/<%= @chapter_number.to_i - 1 %>" class="btn btn-outline-primary">
+    <%# if @chapter_number > 1 %>-->
+<!--      <a href="/books/<%#= @book.id %>/<%= @chapter_number - 1 %>" class="btn btn-outline-primary">
         Previous Chapter
       </a>
     <%# end %>-->
 <!--  </div>
   <div>
-    <%# if @chapter_number.to_i < @book.total_chapters %>-->
-<!--      <a href="/books/<%#= @book.id %>/<%= @chapter_number.to_i + 1 %>" class="btn btn-primary">
+    <%# if @chapter_number < @book.total_chapters %>-->
+<!--      <a href="/books/<%#= @book.id %>/<%= @chapter_number + 1 %>" class="btn btn-primary">
         Next Chapter
       </a>
     <%# end %>-->

@@ -77,14 +77,14 @@ class BooksController < ApplicationController
   def read_chapter
     book_id = params.fetch("book_id")
     @book = Book.find(book_id)
-    @chapter_number = params.fetch("chapter_number")
+    @chapter_number = params.fetch("chapter_number").to_i
 
     esv_api_key = ENV.fetch("ESV_API_KEY") 
     api_url = "https://api.esv.org/v3/passage/html/"
 
 
     params = {
-      "q": @book.title + " " + @chapter_number,
+      "q": @book.title + " " + @chapter_number.to_s,
       "include-headings": true,
       "include-footnotes": true,
       "include-footnote-body": true,
