@@ -12,6 +12,7 @@
 
 <nav aria-label="Chapter navigation" class="my-3">
   <ul class="pagination">
+    <% pagination_span = 10 %>
 
     <% if @chapter_number.to_i > 1 %>
       <li class="page-item">
@@ -30,7 +31,7 @@
       <% end %>
     <% end %>
 
-    <% if @book.total_chapters < 17 %>
+    <% if @book.total_chapters < pagination_span %>
       <% (1..@book.total_chapters).each do |chap_num| %>
         <li class="page-item">
           <a class="page-link" href="/books/<%= @book.id %>/<%= chap_num %>">
@@ -40,31 +41,37 @@
       <% end %>
 
     <% else %>
+      <% span_to_end = @book.total_chapters - @chapter_number.to_i %> 
 
-      <% (1..@book.total_chapters).each do |chap_num| %>
-        <% if chap_num < 8 || chap_num > (@book.total_chapters - 7) %>
+      <% if span_to_end > 10 %>
+        <% (@chapter_number.to_i..(@chapter_number.to_i + 10)).each do |chap_num| %>
           <li class="page-item">
             <a class="page-link" href="/books/<%= @book.id %>/<%= chap_num %>">
               <%= chap_num %>
             </a>
           </li>
-
-        <% elsif chap_num == 8 %>
+        <% end %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+      <% else %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+        <% ((@book.total_chapters - pagination_span)..@book.total_chapters).each do |chap_num| %>
           <li class="page-item">
-            <a class="page-link" href="#">
-              ...
+            <a class="page-link" href="/books/<%= @book.id %>/<%= chap_num %>">
+              <%= chap_num %>
             </a>
           </li>
         <% end %>
-
       <% end %>
-
+  
     <% end %>
-
-
-
-
-
 
     <% if @chapter_number.to_i < @book.total_chapters %>
       <li class="page-item">
