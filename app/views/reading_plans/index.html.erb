@@ -26,6 +26,17 @@
               See details
             </a>
           </div>
+          <div>
+            <% if current_user != nil %>
+              <a href="/reading_plans/subscribe/<%= plan.id %>">
+                Subscribe
+              </a>
+            <% else %>
+              <a href="/users/log_in<%= plan.id %>">
+                Log in to subscribe
+              </a>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ task(:generate_plan_content => :environment) do
     # preliminary_track_positions[book_title] = idx + 1
 
     preliminary_plan_content = ReadingPlanContent.new
-    preliminary_plan_content.plan_id = ReadingPlan.where({:title => "Preliminary Plan"})[0].id
+    preliminary_plan_content.plan_id = ReadingPlan.where({:title => "Cover to Cover (Chronological)"})[0].id
     preliminary_plan_content.book_id = Book.where({:title => book_title})[0].id
     preliminary_plan_content.sequence = idx + 1
 

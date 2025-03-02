@@ -6,7 +6,7 @@ task(:generate_reading_plan => :environment) do
   plan = ReadingPlan.new
   plan.title = "Cover to Cover (Chronological)"
   plan.description = "Want to read the entire Bible cover to cover? This plan will take you through each book in chronological order.
-                      Starting at Genesis and ending at Revelation, this is a long plan, but an amazing goal everyone!"
+                      Starting at Genesis and ending at Revelation, this is a long plan, but an amazing goal for anyone!"
   plan.save
 
   plan = ReadingPlan.new

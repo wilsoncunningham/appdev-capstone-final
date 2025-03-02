@@ -11,4 +11,5 @@
 class ReadingPlan < ApplicationRecord
   has_many  :books, class_name: "ReadingPlanContent", foreign_key: "plan_id", dependent: :nullify
   has_many  :user_chapters, class_name: "UserChapter", foreign_key: "reading_plan_id", dependent: :nullify
+  has_many  :subscriptions, class_name: "Subscription", foreign_key: "plan_id", dependent: :destroy
 end
