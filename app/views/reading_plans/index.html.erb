@@ -28,9 +28,12 @@
           </div>
           <div>
             <% if current_user != nil %>
-              <a href="/reading_plans/subscribe/<%= plan.id %>">
-                Subscribe
-              </a>
+              <% subscribed_plan_ids = current_user.subscriptions.map { |subscription| subscription.plan_id } %>
+              <% if subscribed_plan_ids.include? plan.id %>
+                <%= button_to "Unsubscribe", "/reading_plans/unsubscribe/#{plan.id}", method: :post, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+              <% else %>
+                <%= button_to "Subscribe", "/reading_plans/subscribe/#{plan.id}", method: :post, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+              <% end %>
             <% else %>
               <a href="/users/log_in<%= plan.id %>">
                 Log in to subscribe

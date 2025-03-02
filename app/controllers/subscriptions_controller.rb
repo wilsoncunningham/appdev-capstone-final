@@ -30,6 +30,29 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  #########################
+  def subscribe
+    the_subscription = Subscription.new
+    the_subscription.user_id = current_user.id
+    the_subscription.plan_id = params.fetch("reading_plan_id")
+
+    if the_subscription.valid?
+      the_subscription.save
+      redirect_to("/reading_plans", { :notice => "Subscription created successfully." })
+    else
+      redirect_to("/reading_plans", { :alert => the_subscription.errors.full_messages.to_sentence })
+    end
+  end
+
+  def unsubscribe
+    the_subscription = Subscription.where( { :user_id => current_user.id, :plan_id => params.fetch("reading_plan_id") })[0]
+
+    the_subscription.destroy
+
+    redirect_to("/reading_plans", { :alert => the_subscription.errors.full_messages.to_sentence })
+  end
+  ########################
+
   def update
     the_id = params.fetch("path_id")
     the_subscription = Subscription.where({ :id => the_id }).at(0)

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_subscription", { :controller => "subscriptions", :action => "create" })
+  post("/reading_plans/subscribe/:reading_plan_id", { :controller => "subscriptions", :action => "subscribe" })
           
   # READ
   get("/subscriptions", { :controller => "subscriptions", :action => "index" })
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_subscription/:path_id", { :controller => "subscriptions", :action => "destroy" })
+  post("/reading_plans/unsubscribe/:reading_plan_id", { :controller => "subscriptions", :action => "unsubscribe" })
 
   #------------------------------
 
