@@ -18,19 +18,27 @@ task(:generate_plan_content => :environment) do
     "Jude", "Revelation"
   ]
 
-  # preliminary_track_positions = {}
-
 
   bible_books.each_with_index do |book_title, idx|
     # preliminary_track_positions[book_title] = idx + 1
 
-    new_plan_content = ReadingPlanContent.new
-    new_plan_content.plan_id = ReadingPlan.where({:title => "Preliminary Plan"})[0].id
-    new_plan_content.book_id = Book.where({:title => book_title})[0].id
-    new_plan_content.sequence = idx + 1
+    preliminary_plan_content = ReadingPlanContent.new
+    preliminary_plan_content.plan_id = ReadingPlan.where({:title => "Preliminary Plan"})[0].id
+    preliminary_plan_content.book_id = Book.where({:title => book_title})[0].id
+    preliminary_plan_content.sequence = idx + 1
 
-    new_plan_content.save
+    preliminary_plan_content.save
   end
 
-  
+
+  gospels = ["Matthew", "Mark", "Luke", "John"]
+  gospels.each_with_index do |gospel, idx|
+    gospel_plan_content = ReadingPlanContent.new
+    gospel_plan_content.plan_id = ReadingPlan.where({:title => "Gospels: The Life of Jesus"})[0].id
+    gospel_plan_content.book_id = Book.where({:title => gospel})[0].id
+    gospel_plan_content.sequence = idx + 1
+
+    gospel_plan_content.save
+  end
+    
 end
