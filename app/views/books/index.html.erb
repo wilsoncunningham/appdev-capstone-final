@@ -1,10 +1,54 @@
-<div class="m-2">
-  <h2>Click on a book to start reading</h2>
+<div>
+  <div>
+    <h2>Read Through Your Plans</h2>
+  </div>
+  <br>
+  <div class="accordion" id="my_reading_plans_accordion">
+    <% current_user.subscriptions.each do |subscription|%>
+      <% plan = ReadingPlan.find(subscription.plan_id) %>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_my_<%= plan.id %>" aria-expanded="false" aria-controls="collapse_my_<%= plan.id %>">
+            <strong><%= plan.title %></strong>
+          </button>
+        </h2>
+        <div id="collapse_my_<%= plan.id %>" class="accordion-collapse collapse" data-bs-parent="#my_reading_plans_accordion">
+          <div class="accordion-body">
+            <%= plan.description %>
+            <br><br>
+            <div>
+              <a href="/reading_plans/<%= plan.id %>">
+                See details
+              </a>
+            </div>
+            <br>
+            <div>
+              <%= button_to "Unsubscribe", "/reading_plans/unsubscribe/#{plan.id}", method: :post, data: { confirm: "Are you sure?" }, class: "btn btn-light" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <br>
+  <div>
+    <a href="/reading_plans">
+      See all reading plans
+    </a>  
+  </div>
 </div>
+
+<br>
+<hr>
+
+<div>
+  <h2>Browse All Books</h2>
+</div>
+
 
 <div class="container">
   <div class="row">
-    <div class="col-md-1"></div>
+ <!--   <div class="col-md-1"></div>-->
     <div class="col-md-3">
       <div class="accordion" id="old_testament_accordion">
         <div class="accordion-item">
@@ -25,7 +69,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3"></div>
+  <!--  <div class="col-md-3"></div>-->
     <div class="col-md-3">
       <div class="accordion" id="new_testament_accordion">
         <div class="accordion-item">

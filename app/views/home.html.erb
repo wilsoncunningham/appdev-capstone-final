@@ -42,6 +42,10 @@
                   See details
                 </a>
               </div>
+              <br>
+              <div>
+                <%= button_to "Unsubscribe", "/reading_plans/unsubscribe/#{plan.id}", method: :post, data: { confirm: "Are you sure?" }, class: "btn btn-light" %>
+              </div>
             </div>
           </div>
         </div>
