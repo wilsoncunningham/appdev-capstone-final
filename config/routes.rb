@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get("books/:book_id/:chapter_number", {:controller => "books", :action => "read_chapter"})
 
   get("/reading_plans", {:controller => "reading_plans", :action => "index"})
+  get("/reading_plans/:plan_id/read", {:controller => "reading_plans", :action => "read_plan"})
+  get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "reading_plans", :action => "read_plan_chapter"})
   post("/reading_plans/:plan/:book_id/:chapter_number/complete_chapter", {:controller => "reading_plans", :action => "complete_chapter"})
   post("/books/:book_id/:chapter_number/complete_chapter", {:controller => "reading_plans", :action => "complete_chapter"})
 

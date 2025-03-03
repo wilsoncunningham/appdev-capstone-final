@@ -53,4 +53,54 @@ class ReadingPlansController < ApplicationController
 
     redirect_to("/reading_plans", { :notice => "Reading plan deleted successfully."} )
   end
+
+  def read_plan
+    @plan = ReadingPlan.find(params.fetch("plan_id"))
+    render({ :template => "/reading_plans/read"})
+  end
+
+  def read_plan_chapter
+    book_id = params.fetch("book_id")
+    @book = Book.find(book_id)
+    @chapter_number = params.fetch("chapter_number").to_i
+    @plan = ReadingPlan.find(params.fetch("plan_id"))
+
+    esv_api_key = ENV.fetch("ESV_API_KEY") 
+    api_url = "https://api.esv.org/v3/passage/html/"
+
+
+    api_params = {
+      "q": @book.title + " " + @chapter_number.to_s,
+      "include-headings": true,
+      "include-footnotes": true,
+      "include-footnote-body": true,
+      "include-verse-numbers": true,
+      "include-short-copyright": true,
+      "include-passage-references": true,
+      "include-css-link": true,
+      "inline-styles": false,
+      "wrapping-div": false,
+      "div-classes": false,
+      "include-chapter-numbers": false,
+      "include-crossrefs": false
+    }
+
+    # book_id = Book.where({:title => @book_title.capitalize})[0].id
+    # chapter = Chapter.where({:book_id => book_id, :number => @chapter_number})[0]
+
+    # params = chapter.content
+
+    headers = {
+        "Authorization": "Token #{esv_api_key}"
+    }
+
+    response = HTTP.headers(headers).get(api_url, params: api_params)
+
+    body = JSON.parse(response.body.to_s)
+    @passage = body["passages"][0]
+
+    # passages.any? ? passages[0].strip : "Error: Passage not found"
+
+    render({:template => "/reading_plans/read_chapter"})
+  end
 end

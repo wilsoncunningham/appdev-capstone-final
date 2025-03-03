@@ -44,6 +44,12 @@
               </div>
               <br>
               <div>
+                <a href="/reading_plans/<%= plan.id %>/read" class="btn btn-primary">
+                  Read
+                </a>
+              </div>
+              <br>
+              <div>
                 <%= button_to "Unsubscribe", "/reading_plans/unsubscribe/#{plan.id}", method: :post, data: { confirm: "Are you sure?" }, class: "btn btn-light" %>
               </div>
             </div>

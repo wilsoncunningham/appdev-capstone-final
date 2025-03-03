@@ -1,0 +1,18 @@
+<h1><%= @plan.title %></h1>
+
+<p>Progress:</p>
+
+<p>Continue reading</p>
+
+
+
+<h3>Books</h3>
+<% @plan.books.each do |content|%>
+  <% book = Book.find(content.book_id) %>
+  <% chapter_number = 1 %>
+  <div>
+    <a href="/reading_plans/<%= @plan.id %>/read/<%= book.id %>/<%= chapter_number %>">
+      <%= book.title %>
+    </a>
+  </div>
+<% end %>

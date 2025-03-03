@@ -83,7 +83,7 @@ class BooksController < ApplicationController
     api_url = "https://api.esv.org/v3/passage/html/"
 
 
-    params = {
+    api_params = {
       "q": @book.title + " " + @chapter_number.to_s,
       "include-headings": true,
       "include-footnotes": true,
@@ -108,7 +108,7 @@ class BooksController < ApplicationController
         "Authorization": "Token #{esv_api_key}"
     }
 
-    response = HTTP.headers(headers).get(api_url, params: params)
+    response = HTTP.headers(headers).get(api_url, params: api_params)
 
     body = JSON.parse(response.body.to_s)
     @passage = body["passages"][0]
