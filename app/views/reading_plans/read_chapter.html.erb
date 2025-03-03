@@ -1,14 +1,10 @@
 
 <p>Params are: <%=params%></p>
 
-
-<% if @next_book != nil %>
-  <h3>The next book (from controller) is: <%= @next_book.title %></h3>
-<% end %>
-
-<% if @prev_book != nil %>
-  <h3>The prev book (from controller) is: <%= @prev_book.title %></h3>
-<% end %>
+<p>
+  Have you read this chapter yet? According to the DB:
+  <%= current_user.user_chapters.where({ :chapter_id => @chapter.id }).length > 0 %>
+</p>
 
 <nav aria-label="Chapter navigation" class="my-3">
   <ul class="pagination">
@@ -147,7 +143,7 @@
 
 
 <div class="d-flex justify-content-end">
-  <form action="<%= @chapter_number %>/complete_chapter" method="post">
+  <form action="/complete_chapter/<%= @plan.id %>/<%= @book.id %>/<%= @chapter.id %>" method="post">
     <button class="btn btn-success">Mark as Complete</button>
   </form>
 </div>

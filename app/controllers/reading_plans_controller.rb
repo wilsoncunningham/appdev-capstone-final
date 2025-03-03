@@ -63,6 +63,7 @@ class ReadingPlansController < ApplicationController
     book_id = params.fetch("book_id")
     @book = Book.find(book_id)
     @chapter_number = params.fetch("chapter_number").to_i
+    @chapter = Chapter.where({ :book_id => @book.id, :number => @chapter_number })[0]
     @plan = ReadingPlan.find(params.fetch("plan_id"))
     @plan_books = @plan.books
 

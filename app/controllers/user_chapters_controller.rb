@@ -59,4 +59,27 @@ class UserChaptersController < ApplicationController
 
     redirect_to("/user_chapters", { :notice => "User chapter deleted successfully."} )
   end
+
+  def complete_chapter
+    the_user_chapter = UserChapter.new
+
+    the_chapter = Chapter.find(params.fetch("chapter_id"))
+    the_plan = ReadingPlan.find(params.fetch("plan_id"))
+    the_book = Book.find(params.fetch("book_id"))
+
+    the_user_chapter.chapter_id = the_chapter.id
+    the_user_chapter.user_id = current_user.id
+    # the_user_chapter.completed_at = params.fetch("query_completed_at")
+    # the_user_chapter.status = params.fetch("query_status")
+    the_user_chapter.reading_plan_id = params.fetch("plan_id")
+
+    chapter_number = the_chapter.number
+
+    if the_user_chapter.valid?
+      the_user_chapter.save
+      redirect_to("/reading_plans/#{the_plan.id}/read/#{the_book.id}/#{chapter_number}", { :notice => "User chapter created successfully." })
+    else
+      redirect_to("/reading_plans/#{the_plan.id}/read/#{the_book.id}/#{chapter_number}", { :alert => the_user_chapter.errors.full_messages.to_sentence })
+    end
+  end
 end

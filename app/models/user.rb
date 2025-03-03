@@ -29,7 +29,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many  :friends, class_name: "Friendship", foreign_key: "user1_id", dependent: :nullify
-  has_many  :user_progresses, class_name: "UserBook", foreign_key: "user_id", dependent: :destroy
   has_many  :user_chapters, class_name: "UserChapter", foreign_key: "user_id", dependent: :destroy
   has_many  :subscriptions, class_name: "Subscription", foreign_key: "user_id", dependent: :destroy
   belongs_to :current_book, required: false, class_name: "Book", foreign_key: "current_book_id", counter_cache: :current_readers_count
