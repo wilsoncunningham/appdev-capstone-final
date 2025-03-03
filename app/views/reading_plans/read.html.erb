@@ -1,6 +1,20 @@
 <h1><%= @plan.title %></h1>
 
-<p>Progress:</p>
+<dl>
+  <dt>Progress:</dt>
+    <dd>
+      <ul>
+        <% @plan.books.each do |content|%>
+          <% book = Book.find(content.book_id) %>
+          <% user_chapters_in_book = UserChapter.joins(:chapter).where(chapters: { :book_id => book.id }) %>
+          <li>
+            <%= book.title %>: <%= user_chapters_in_book.length %> chapters completed
+          </li>
+        <% end %>
+      </ul>
+    </dd>
+</dl>
+
 
 <p>Continue reading</p>
 
