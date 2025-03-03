@@ -64,6 +64,22 @@ class ReadingPlansController < ApplicationController
     @book = Book.find(book_id)
     @chapter_number = params.fetch("chapter_number").to_i
     @plan = ReadingPlan.find(params.fetch("plan_id"))
+    @plan_books = @plan.books
+
+    current_book_idx = @plan_books.index { |content| content.book_id == @book.id }
+    if current_book_idx <= @plan_books.length - 2
+      @next_book = Book.find(@plan_books[current_book_idx + 1].book_id)
+    else
+      @next_book = nil
+    end
+    
+    if current_book_idx > 0
+      @prev_book = Book.find(@plan_books[current_book_idx - 1].book_id)
+    else
+      @prev_book = nil
+    end
+
+
 
     esv_api_key = ENV.fetch("ESV_API_KEY") 
     api_url = "https://api.esv.org/v3/passage/html/"
