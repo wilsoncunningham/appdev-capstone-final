@@ -2,6 +2,14 @@ Rails.application.routes.draw do
 
   devise_for :users
   root "home#index"
+
+  ######################################
+
+  get("/", {:controller => "home", :action => "index"})
+  get("/read", { :controller => "reading", :action => "index"})
+
+
+  ######################################
   
   # Routes for the Subscription resource:
 
@@ -15,23 +23,6 @@ Rails.application.routes.draw do
   post("/reading_plans/unsubscribe/:reading_plan_id", { :controller => "subscriptions", :action => "unsubscribe" })
 
   #------------------------------
-
-  ######################################
-
-  get("/", {:controller => "home", :action => "index"})
-
-  get("/books", {:controller => "books", :action => "index"})
-  get("/books/:book_id/", {:controller => "books", :action => "read_book"})
-  get("/books/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_vanilla"})
-
-  get("/reading_plans", {:controller => "reading_plans", :action => "index"})
-  get("/reading_plans/:plan_id/read", {:controller => "reading_plans", :action => "read_plan"})
-  get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_plan"})
-  
-  post("/complete_chapter/:plan_id/:book_id/:chapter_id", {:controller => "user_chapters", :action => "complete_chapter"})
-
-  ######################################
-
 
   # Routes for the User chapter resource:
 
@@ -50,6 +41,10 @@ Rails.application.routes.draw do
   get("/reading_plan_contents/:path_id", { :controller => "reading_plan_contents", :action => "show" })
   post("/modify_reading_plan_content/:path_id", { :controller => "reading_plan_contents", :action => "update" })
   get("/delete_reading_plan_content/:path_id", { :controller => "reading_plan_contents", :action => "destroy" })
+
+  get("/reading_plans", {:controller => "reading_plans", :action => "index"})
+  get("/reading_plans/:plan_id/read", {:controller => "reading_plans", :action => "read_plan"})
+  get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_plan"})
 
   #------------------------------
 
@@ -102,6 +97,8 @@ Rails.application.routes.draw do
   get("/chapters/:path_id", { :controller => "chapters", :action => "show" })
   post("/modify_chapter/:path_id", { :controller => "chapters", :action => "update" })
   get("/delete_chapter/:path_id", { :controller => "chapters", :action => "destroy" })
+  
+  post("/complete_chapter/:plan_id/:book_id/:chapter_id", {:controller => "user_chapters", :action => "complete_chapter"})
 
   #------------------------------
 
@@ -113,9 +110,9 @@ Rails.application.routes.draw do
   post("/modify_book/:path_id", { :controller => "books", :action => "update" })
   get("/delete_book/:path_id", { :controller => "books", :action => "destroy" })
 
+  get("/books/:book_id/", {:controller => "books", :action => "read_book"})
+  get("/books/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_vanilla"})
+
   #------------------------------
-
-  get("/read", { :controller => "reading", :action => "index"})
-
   
 end
