@@ -1,35 +1,24 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  root "home#index"
+  
   # Routes for the Subscription resource:
 
-  # CREATE
+  get("/subscriptions", { :controller => "subscriptions", :action => "index" })
+  get("/subscriptions/:path_id", { :controller => "subscriptions", :action => "show" })
+  post("/modify_subscription/:path_id", { :controller => "subscriptions", :action => "update" })
+  get("/delete_subscription/:path_id", { :controller => "subscriptions", :action => "destroy" })
+
   post("/insert_subscription", { :controller => "subscriptions", :action => "create" })
   post("/reading_plans/subscribe/:reading_plan_id", { :controller => "subscriptions", :action => "subscribe" })
-          
-  # READ
-  get("/subscriptions", { :controller => "subscriptions", :action => "index" })
-  
-  get("/subscriptions/:path_id", { :controller => "subscriptions", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_subscription/:path_id", { :controller => "subscriptions", :action => "update" })
-  
-  # DELETE
-  get("/delete_subscription/:path_id", { :controller => "subscriptions", :action => "destroy" })
   post("/reading_plans/unsubscribe/:reading_plan_id", { :controller => "subscriptions", :action => "unsubscribe" })
 
   #------------------------------
 
-  devise_for :users
-  root "home#index"
-
   ######################################
 
   get("/", {:controller => "home", :action => "index"})
-
-  # get("/login", {:controller => "home", :action => "login"})
-  # post("/test_credentials", {:controller => "home", :action => "test_credentials"})
 
   get("/books", {:controller => "books", :action => "index"})
   get("/books/:book_id/", {:controller => "books", :action => "read_book"})
@@ -39,12 +28,7 @@ Rails.application.routes.draw do
   get("/reading_plans/:plan_id/read", {:controller => "reading_plans", :action => "read_plan"})
   get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_plan"})
   
-
-  
   post("/complete_chapter/:plan_id/:book_id/:chapter_id", {:controller => "user_chapters", :action => "complete_chapter"})
-
-
-  post("/books/:book_id/:chapter_number/complete_chapter", {:controller => "reading_plans", :action => "complete_chapter"})
 
   ######################################
 
@@ -124,12 +108,14 @@ Rails.application.routes.draw do
   # Routes for the Book resource:
 
   post("/insert_book", { :controller => "books", :action => "create" })
-  get("/books", { :controller => "books", :action => "index" })
+  # get("/books", { :controller => "books", :action => "index" })
   get("/books/:path_id", { :controller => "books", :action => "show" })
   post("/modify_book/:path_id", { :controller => "books", :action => "update" })
   get("/delete_book/:path_id", { :controller => "books", :action => "destroy" })
 
   #------------------------------
+
+  get("/read", { :controller => "reading", :action => "index"})
 
   
 end

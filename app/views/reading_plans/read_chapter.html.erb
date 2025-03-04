@@ -1,10 +1,7 @@
 
 <p>Params are: <%=params%></p>
 
-<p>
-  Have you read this chapter yet? According to the DB:
-  <%= current_user.user_chapters.where({ :chapter_id => @chapter.id }).length > 0 %>
-</p>
+<h3>chapter.is_complete: <%= @chapter.is_complete(current_user, @plan) %></h3>
 
 <nav aria-label="Chapter navigation" class="my-3">
   <ul class="pagination">
