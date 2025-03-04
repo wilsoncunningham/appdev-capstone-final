@@ -32,12 +32,12 @@ Rails.application.routes.draw do
   # post("/test_credentials", {:controller => "home", :action => "test_credentials"})
 
   get("/books", {:controller => "books", :action => "index"})
-  get("books/:book_id/", {:controller => "books", :action => "read_book"})
-  get("books/:book_id/:chapter_number", {:controller => "books", :action => "read_chapter"})
+  get("/books/:book_id/", {:controller => "books", :action => "read_book"})
+  get("/books/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_vanilla"})
 
   get("/reading_plans", {:controller => "reading_plans", :action => "index"})
   get("/reading_plans/:plan_id/read", {:controller => "reading_plans", :action => "read_plan"})
-  get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "reading_plans", :action => "read_plan_chapter"})
+  get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_plan"})
   
 
   
