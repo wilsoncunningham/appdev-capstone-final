@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get("/reading_plans/:plan_id/read", {:controller => "reading_plans", :action => "read_plan"})
   get("/reading_plans/:plan_id/read/:book_id/:chapter_number", {:controller => "chapters", :action => "read_chapter_plan"})
 
+  # post("/reading_plans/:plan_id/navigate_to/:query_book_title/:query_chapter_number", { :controller => "chapters", :action => "query_navigate"})
+
   #------------------------------
 
   # Routes for the Verse resource:

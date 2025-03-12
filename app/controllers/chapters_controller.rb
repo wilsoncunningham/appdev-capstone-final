@@ -162,4 +162,13 @@ class ChaptersController < ApplicationController
     render({:template => "/reading_plans/read_chapter"})
   end
 
+  # def query_navigate
+  #   plan_id = params.fetch("plan_id")
+  #   query_book_title = params.fetch("query_book_title")
+  #   matching_book = Book.where({ :title => query_book_title.capitalize})[0]
+  #   book_id = matching_book.id
+  #   chapter_number = params.fetch("query_chapter_number")
+  #   redirect_to("reading_plans/#{plan_id}/read/#{@book.id}/#{chapter_number}")
+  # end
+
 end

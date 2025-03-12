@@ -3,9 +3,9 @@
 
 <h3>chapter.is_complete: <%#= @chapter.is_complete(current_user, @plan) %></h3>-->
 
-<div>
-  <!--<form action="/reading_plans/<%#= @plan.id %>/read/query_book_id/query_chapter_number">-->
-  <form action="/reading_plans/<%= @plan.id %>/navigate_to/book_title/chapter_number" method="post">
+<!--<div>-->
+  <form action="/reading_plans/<%= @plan.id %>/read/query_book_id/query_chapter_number">
+<!--  <form action="/reading_plans/<%#= @plan.id %>/navigate_to/query_book_title/query_chapter_number" method="post">
     <div class="m-1">
       <label for="book_title">
         Book Title:
@@ -22,7 +22,7 @@
       <button>Go</button>
     </div>
   </form>
-</div>
+</div>-->
 
 <hr>
 
