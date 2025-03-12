@@ -18,4 +18,9 @@ class Book < ApplicationRecord
   has_many  :user_progresses, class_name: "UserBook", foreign_key: "book_id", dependent: :destroy
   has_many  :reading_tracks, class_name: "ReadingPlanContent", foreign_key: "book_id", dependent: :nullify
   has_many :readers, through: :user_progresses, source: :user
+
+  def tester
+    return self.total_chapters * 100
+  end
+
 end
