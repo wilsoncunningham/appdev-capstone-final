@@ -1,7 +1,30 @@
 
-<p>Params are: <%=params%></p>
+<!--<p>Params are: <%#=params%></p>
 
-<h3>chapter.is_complete: <%= @chapter.is_complete(current_user, @plan) %></h3>
+<h3>chapter.is_complete: <%#= @chapter.is_complete(current_user, @plan) %></h3>-->
+
+<div>
+  <!--<form action="/reading_plans/<%#= @plan.id %>/read/query_book_id/query_chapter_number">-->
+  <form action="/reading_plans/<%= @plan.id %>/navigate_to/book_title/chapter_number" method="post">
+    <div class="m-1">
+      <label for="book_title">
+        Book Title:
+      </label>
+      <input id="book_title" name="query_book_title" type="text">
+    </div>
+    <div class="m-1">
+      <label for="chapter_number">
+        Chapter Number:
+      </label>
+      <input id="chapter_number" name="query_chapter_number" type="text">
+    </div>
+    <div class="m-1">
+      <button>Go</button>
+    </div>
+  </form>
+</div>
+
+<hr>
 
 <nav aria-label="Chapter navigation" class="my-3">
   <ul class="pagination">
@@ -28,7 +51,7 @@
       <% else %>
         <li class="page-item">
           <a href="#" class="page-link">
-            THIS IS THE BEGINNING
+            Beginning of Plan
           </a>
         </li>
       <% end %>
@@ -107,7 +130,7 @@
       <% else %>
         <li class="page-item">
           <a href="#" class="page-link">
-            THIS IS THE END
+            End of Plan
           </a>
         </li>
       <% end %>
@@ -122,31 +145,18 @@
 <!--</div>-->
 
 
-
 <div class="container">
   <div class="row">
 <!--    <div class="col-md-1"></div>-->
     <div class="col-md-6">
-      <%= raw @passage %>
+      <div>
+        <%= raw @passage %>
+      </div>
+      <div class="d-flex justify-content-end">
+        <form action="/complete_chapter/<%= @plan.id %>/<%= @book.id %>/<%= @chapter.id %>" method="post">
+          <button class="btn btn-success">Mark as Complete</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<div class="d-flex justify-content-end">
-  <form action="/complete_chapter/<%= @plan.id %>/<%= @book.id %>/<%= @chapter.id %>" method="post">
-    <button class="btn btn-success">Mark as Complete</button>
-  </form>
-</div>
-
-<hr>
-
-
-
-<hr>
