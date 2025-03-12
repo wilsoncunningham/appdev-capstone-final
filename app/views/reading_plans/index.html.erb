@@ -87,7 +87,7 @@
 </div>
 
 <hr>
-
+<!--
 <div>
   <div>
     <h2>
@@ -147,36 +147,37 @@
         </th>
       </tr>
 
-      <% @list_of_reading_plans.each do |a_reading_plan| %>
-      <tr>
+      <%# @list_of_reading_plans.each do |a_reading_plan| %>-->
+<!--      <tr>
         <td>
-          <%= a_reading_plan.id %>
-        </td>
+          <%#= a_reading_plan.id %>-->
+<!--        </td>
 
         <td>
-          <%= a_reading_plan.title %>
-        </td>
+          <%#= a_reading_plan.title %>-->
+<!--        </td>
 
         <td>
-          <%= a_reading_plan.description %>
-        </td>
+          <%#= a_reading_plan.description %>-->
+<!--        </td>
 
         <td>
-          <%= time_ago_in_words(a_reading_plan.created_at) %> ago
-        </td>
+          <%#= time_ago_in_words(a_reading_plan.created_at) %> ago-->
+<!--        </td>
         <td>
-          <%= time_ago_in_words(a_reading_plan.updated_at) %> ago
-        </td>
+          <%#= time_ago_in_words(a_reading_plan.updated_at) %> ago-->
+<!--        </td>
 
         <td>
-          <a href="/reading_plans/<%= a_reading_plan.id %>">
+          <a href="/reading_plans/<%#= a_reading_plan.id %>">
             Show details
           </a>
         </td>
       </tr>
-      <% end %>
-    </table>
+      <%# end %>-->
+<!--    </table>
   </div>
 </div>
 
 <hr>
+-->
