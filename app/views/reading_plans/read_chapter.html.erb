@@ -160,3 +160,119 @@
     </div>
   </div>
 </div>
+
+<hr>
+
+<nav aria-label="Chapter navigation" class="my-3">
+  <ul class="pagination">
+    <%
+    pagination_span = 14
+    upper_bound = @chapter_number + (pagination_span / 2)
+    lower_bound = @chapter_number - (pagination_span / 2)
+    chapters_from_end = @book.total_chapters - @chapter_number
+     %>
+
+    <% if @chapter_number > 1 %>
+      <li class="page-item">
+        <a class="page-link" href="/reading_plans/<%= @plan.id %>/read/<%= @book.id %>/<%= @chapter_number - 1 %>">
+          Previous Chapter
+        </a>
+      </li>
+    <% else %>
+      <% if @prev_book != nil %>
+        <li class="page-item">
+          <a href="/reading_plans/<%= @plan.id %>/read/<%= @prev_book.id %>/1" class="page-link">
+            Previous Book
+          </a>
+        </li>
+      <% else %>
+        <li class="page-item">
+          <a href="#" class="page-link">
+            Beginning of Plan
+          </a>
+        </li>
+      <% end %>
+    <% end %>
+
+    <% if @book.total_chapters < pagination_span %>
+      <% (1..@book.total_chapters).each do |chap_num| %>
+        <li class="page-item">
+          <a class="page-link" href="/reading_plans/<%= @plan.id %>/read/<%= @book.id %>/<%= chap_num %>">
+            <%= chap_num %>
+          </a>
+        </li>
+      <% end %>
+    <% else %>
+    
+      <% if lower_bound > 1 && upper_bound < @book.total_chapters %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+        <% (lower_bound..upper_bound).each do |chap_num| %>
+          <li class="page-item">
+            <a class="page-link" href="/reading_plans/<%= @plan.id %>/read/<%= @book.id %>/<%= chap_num %>">
+              <%= chap_num %>
+            </a>
+          </li>
+        <% end %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+      <% elsif lower_bound <= 1 && upper_bound < @book.total_chapters %>
+        <% (1..pagination_span).each do |chap_num| %>
+          <li class="page-item">
+            <a class="page-link" href="/reading_plans/<%= @plan.id %>/read/<%= @book.id %>/<%= chap_num %>">
+              <%= chap_num %>
+            </a>
+          </li>
+        <% end %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+      <% else  %>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            ...
+          </a>
+        </li>
+        <% ((@book.total_chapters - pagination_span)..@book.total_chapters).each do |chap_num| %>
+          <li class="page-item">
+            <a class="page-link" href="/reading_plans/<%= @plan.id %>/read/<%= @book.id %>/<%= chap_num %>">
+              <%= chap_num %>
+            </a>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @chapter_number < @book.total_chapters %>
+      <li class="page-item">
+        <a href="/reading_plans/<%= @plan.id %>/read/<%= @book.id %>/<%= @chapter_number + 1 %>" class="page-link">
+          Next Chapter
+        </a>
+      </li>
+    <% else %>
+      <% if @next_book != nil %>
+        <li class="page-item">
+          <a href="/reading_plans/<%= @plan.id %>/read/<%= @next_book.id %>/1" class="page-link">
+            Next Book
+          </a>
+        </li>
+      <% else %>
+        <li class="page-item">
+          <a href="#" class="page-link">
+            End of Plan
+          </a>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>
+
+<hr>

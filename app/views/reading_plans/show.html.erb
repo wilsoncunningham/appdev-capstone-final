@@ -1,57 +1,3 @@
-<!--<div>
-  <div>
-    <h1>
-      <%#= @the_reading_plan.title %>-->
-<!--    </h1>
-
-    <div>
-      <div>
-        <a href="/reading_plans">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_reading_plan/<%#= @the_reading_plan.id %>">
-          Delete reading plan
-        </a>
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%#= @the_reading_plan.title %>-->
-<!--      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%#= @the_reading_plan.description %>-->
-<!--      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%#= time_ago_in_words(@the_reading_plan.created_at) %> ago-->
-<!--      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%#= time_ago_in_words(@the_reading_plan.updated_at) %> ago-->
-<!--      </dd>
-    </dl>
-  </div>
-</div>
-
-<hr>-->
-
 <div>
   <div>
     <h1>
@@ -62,12 +8,6 @@
       <div>
         <a href="/reading_plans">
           Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_reading_plan/<%= @the_reading_plan.id %>">
-          Delete reading plan
         </a>
       </div>
     </div>
@@ -109,36 +49,3 @@
 </div>
 
 
-<hr>
-
-<div>
-  <div>
-    <h2>
-      Edit reading plan
-    </h2>
-
-    <form action="/modify_reading_plan/<%= @the_reading_plan.id %>"  method="post" >
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title" value="<%= @the_reading_plan.title %>">
-      </div>
-
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <textarea id="description_box" name="query_description"><%= @the_reading_plan.description %></textarea>
-      </div>
-
-      <button>
-        Update reading plan
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
